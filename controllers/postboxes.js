@@ -2,7 +2,7 @@ const Postbox = require('../models/postbox');
 
 function postboxesIndex(req, res) {
   Postbox
-    .find().limit(5)
+    .find()
     .exec()
     .then(postboxes => res.json(postboxes))
     .catch(err => res.status(500).json(err));
