@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const mongoose = require('mongoose');
+mongoose.plugin(require('./lib/globalToJSON'));
 
 const router = require('./config/router');
 
