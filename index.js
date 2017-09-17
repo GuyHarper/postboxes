@@ -14,7 +14,7 @@ const { dbURI, port } = require('./config/environment');
 mongoose.connect(dbURI, { useMongoClient: true });
 
 app.use(morgan('dev'));
-
+app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.json());
 
 app.use(router);
