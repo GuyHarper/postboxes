@@ -3,6 +3,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 mongoose.plugin(require('./lib/globalToJSON'));
+mongoose.Promise = require('bluebird');
 
 const router = require('./config/router');
 
