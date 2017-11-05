@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "seed": "node db/seeds.js"
+    "seed": "node db/seeds.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
