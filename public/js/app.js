@@ -15,7 +15,7 @@ $(() => {
   }
 
   function getPostboxes() {
-  $.get('http://localhost:3000/postboxes')
+  $.get('/postboxes')
     .done((response) => {
       locations = response;
       findNearby();
