@@ -15,11 +15,11 @@ $(() => {
   }
 
   function getPostboxes() {
-  $.get('/postboxes')
-    .done((response) => {
-      locations = response;
-      findNearby();
-    });
+    $.get('/postboxes')
+      .done((response) => {
+        locations = response;
+        findNearby();
+      });
   }
 
   function findNearby() {
