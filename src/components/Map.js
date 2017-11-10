@@ -19,7 +19,7 @@ class Map extends React.Component {
 
   initializeMap = () => {
     this.map = new google.maps.Map(this.mapCanvas, {
-      zoom: 14,
+      zoom: 15,
       center: this.state.locality
     });
   }
@@ -28,7 +28,8 @@ class Map extends React.Component {
     const latLng = { lat: location.lat, lng: location.lng };
     this.marker = new google.maps.Marker({
       position: latLng,
-      map: this.map
+      map: this.map,
+      icon: '../assets/images/red-dot.svg'
     });
   }
 
