@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Map from './components/map';
+import Map from './components/Map';
 
 import './scss/style.scss';
 
