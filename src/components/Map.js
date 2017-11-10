@@ -1,24 +1,32 @@
+/* global google:ignore */
+
 import React from 'react';
 import Axios from 'axios';
 
 class Map extends React.Component {
   state = {
-    postboxes: []
+    postboxes: [],
+    locality: { lat: 51.515213, lng: -0.072331 }
+  }
+
+  initializeMap = () => {
+    this.map = new google.maps.Map(this.mapCanvas, {
+      zoom: 14,
+      center: this.state.locality
+    });
   }
 
   componentWillMount() {
     Axios
       .get('/api/postboxes')
-      .then(res => this.setState({ postboxes: res.data }, () => console.log(this.state)))
+      .then(res => this.setState({ postboxes: res.data }, () => this.initializeMap()))
       .catch(err => console.log(err));
   }
 
   render() {
-    if(this.state.postboxes.length > 0) {
-      return (
-        <p>postboxes loaded</p>
-      );
-    } else return false;
+    return (
+      <div className="map" ref={element => this.mapCanvas = element}></div>
+    );
   }
 }
 
