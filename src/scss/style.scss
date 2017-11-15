@@ -4,11 +4,14 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  color: theme-color("primary");
 }
 
 main {
   position: relative;
+}
+
+p {
+  margin-bottom: 5px;
 }
 
 section {
@@ -53,8 +56,7 @@ section {
         border-radius: .25rem;
         &:hover {
           cursor: pointer;
-          color: theme-color("secondary");
-          border-color: theme-color("secondary");
+          background-color: #fff;
         }
       }
     }
