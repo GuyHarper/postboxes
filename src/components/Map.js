@@ -6,12 +6,12 @@ import Axios from 'axios';
 class Map extends React.Component {
   state = {
     postboxes: [],
-    locality: { lat: 51.515213, lng: -0.072331 },
+    locality: {},
     infowindows: []
   }
 
   componentDidMount() {
-    this.initializeMap();
+    this.setState({locality: this.props.locality}, () => this.initializeMap());
     Axios
       .get('/api/postboxes')
       .then(res => this.setState({ postboxes: res.data }, () => this.findNearby()))
@@ -19,6 +19,7 @@ class Map extends React.Component {
   }
 
   initializeMap = () => {
+    console.log(this.state.locality);
     this.map = new google.maps.Map(this.mapCanvas, {
       zoom: 15,
       center: this.state.locality
@@ -26,7 +27,6 @@ class Map extends React.Component {
   }
 
   showMarker = (postbox) => {
-    console.log(postbox);
     const latLng = { lat: postbox.lat, lng: postbox.lng };
     const marker = new google.maps.Marker({
       position: latLng,
