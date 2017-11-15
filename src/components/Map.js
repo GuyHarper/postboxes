@@ -69,7 +69,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="map" ref={element => this.mapCanvas = element}></div>
+      <section className="map" ref={element => this.mapCanvas = element}></section>
     );
   }
 }

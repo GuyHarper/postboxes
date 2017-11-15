@@ -1,9 +1,62 @@
+@import './_custom-variables.scss';
+@import './bootstrap/bootstrap.scss';
+
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: theme-color("primary");
 }
 
-div.map {
-  width: 100%;
-  height: 100vh;
-  background-color: lightgrey;
+main {
+  position: relative;
+}
+
+section {
+  &.map {
+    width: 100%;
+    height: 100vh;
+    background-color: $gray-300;
+  }
+  &.form-container {
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    display: flex;
+    justify-content: center;
+    left: 10px;
+    width: 440px;
+    height: 80px;
+    background-color: theme-color("primary");
+    border-color: theme-color("secondary");
+    border-radius: 5px;
+    form {
+      width: 95%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .form-group {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        flex-basis: 240px;
+        input[type="text"] {
+          &.form-control {
+            border: 1px solid $gray-400;
+          }
+        }
+      }
+      button.btn {
+        background-color: $gray-100;
+        color: theme-color("primary");
+        border-color: theme-color("secondary");
+        border-radius: .25rem;
+        &:hover {
+          cursor: pointer;
+          color: theme-color("secondary");
+          border-color: theme-color("secondary");
+        }
+      }
+    }
+  }
 }

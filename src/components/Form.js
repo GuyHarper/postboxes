@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Form extends React.component {
+class Form extends React.Component {
 
   state = {
     locality: {}
@@ -8,7 +8,14 @@ class Form extends React.component {
 
   render() {
     return (
-      <div></div>
+      <section className="form-container">
+        <form>
+          <div className="form-group">
+            <input className="form-control" type="text" placeholder="Enter your location"></input>
+          </div>
+          <button type="submit" className="btn">Find postboxes</button>
+        </form>
+      </section>
     );
   }
 }

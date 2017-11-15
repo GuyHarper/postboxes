@@ -11,8 +11,8 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <Map />
         <Form />
+        <Map />
       </main>
     );
   }
