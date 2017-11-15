@@ -45,7 +45,7 @@ section {
         flex-basis: 240px;
         input[type="text"] {
           &.form-control {
-            border: 1px solid $gray-400;
+            border: 1px solid theme-color("secondary");
           }
         }
       }
@@ -57,6 +57,7 @@ section {
         &:hover {
           cursor: pointer;
           background-color: #fff;
+          color: theme-color("secondary");
         }
       }
     }
