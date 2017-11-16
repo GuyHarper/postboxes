@@ -1,28 +1,38 @@
 /* global google:ignore */
 
 import React from 'react';
-import Axios from 'axios';
 
 class Map extends React.Component {
   state = {
     postboxes: [],
-    locality: {},
+    localityLatLng: {},
+    markers: [],
     infowindows: []
   }
 
   componentDidMount() {
-    this.setState({locality: this.props.locality}, () => this.initializeMap());
-    Axios
-      .get('/api/postboxes')
-      .then(res => this.setState({ postboxes: res.data }, () => this.findNearby()))
-      .catch(err => console.log(err));
+    this.setState({localityLatLng: this.props.localityLatLng}, () => this.initializeMap());
+  }
+
+  componentWillReceiveProps(props) {
+    if(this.state.localityLatLng !== props.localityLatLng) {
+      this.setState({postboxes: props.postboxes, localityLatLng: props.localityLatLng}, () => {
+        if(this.state.localityLatLng) {
+          this.map.setCenter(new google.maps.LatLng(this.state.localityLatLng.lat, this.state.localityLatLng.lng));
+          console.log(this.state);
+          // this.state.markers.forEach(marker => {
+          //   marker.setMap(null);
+          // });
+        }
+        this.findNearby();
+      });
+    }
   }
 
   initializeMap = () => {
-    console.log(this.state.locality);
     this.map = new google.maps.Map(this.mapCanvas, {
       zoom: 15,
-      center: this.state.locality
+      center: this.props.localityLatLng
     });
   }
 
@@ -33,6 +43,11 @@ class Map extends React.Component {
       map: this.map,
       icon: '../assets/images/red-dot.svg'
     });
+    // this.setState(prevState => {
+    //   const markers = [...prevState.infowindows];
+    //   markers.push(marker);
+    //   return {markers: markers};
+    // });
     let content = null;
     if(postbox.lastCollection && postbox.saturdayCollection) {
       content = `<p><strong>Last collection:</strong> ${postbox.lastCollection}</p><p><strong>Saturday collection:</strong> ${postbox.saturdayCollection}</p>`;
@@ -54,13 +69,13 @@ class Map extends React.Component {
         const infowindows = [...prevState.infowindows];
         infowindows.push(infowindow);
         return {infowindows: infowindows};
-      }, () => console.log(this.state));
+      });
     }
   }
 
   findNearby = () => {
     const nearbyPostboxes = this.state.postboxes.filter((postbox) => {
-      return (Math.abs(postbox.lng - this.state.locality.lng) < 0.005) && (Math.abs(postbox.lat - this.state.locality.lat) < 0.005);
+      return (Math.abs(postbox.lng - this.state.localityLatLng.lng) < 0.005) && (Math.abs(postbox.lat - this.state.localityLatLng.lat) < 0.005);
     });
     nearbyPostboxes.forEach((postbox) => {
       this.showMarker(postbox);
